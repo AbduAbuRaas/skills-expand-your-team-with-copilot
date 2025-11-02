@@ -1,4 +1,30 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // Theme toggle functionality
+  const themeCheckbox = document.getElementById("theme-checkbox");
+  const sliderIcon = document.querySelector(".slider-icon");
+
+  // Check for saved theme preference or default to light mode
+  const currentTheme = localStorage.getItem("theme") || "light";
+  if (currentTheme === "dark") {
+    document.body.classList.add("dark-mode");
+    themeCheckbox.checked = true;
+    sliderIcon.textContent = "🌙";
+  }
+
+  // Theme toggle event listener
+  themeCheckbox.addEventListener("change", () => {
+    document.body.classList.toggle("dark-mode");
+    
+    // Update icon and theme based on current mode
+    if (document.body.classList.contains("dark-mode")) {
+      sliderIcon.textContent = "🌙";
+      localStorage.setItem("theme", "dark");
+    } else {
+      sliderIcon.textContent = "☀️";
+      localStorage.setItem("theme", "light");
+    }
+  });
+
   // DOM elements
   const activitiesList = document.getElementById("activities-list");
   const messageDiv = document.getElementById("message");
