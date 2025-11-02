@@ -208,6 +208,7 @@ section h3 {
   color: var(--primary);
   font-size: 1rem;
   letter-spacing: 0.3px;
+  padding-top: 20px;
   padding-bottom: 6px;
   border-bottom: 1px solid var(--border-light);
 }
@@ -231,6 +232,19 @@ section h3 {
   right: 8px;
   background: #e8eaf6;
   color: #3949ab;
+  font-size: 0.65rem;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+/* Difficulty Badge */
+.difficulty-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
   font-size: 0.65rem;
   font-weight: bold;
   padding: 2px 6px;
@@ -579,9 +593,16 @@ footer {
   gap: 6px;
 }
 
+.difficulty-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
 .category-filter,
 .day-filter,
-.time-filter {
+.time-filter,
+.difficulty-filter {
   background-color: var(--background);
   border: 1px solid var(--border);
   color: var(--text-primary);
@@ -594,7 +615,8 @@ footer {
 
 .category-filter.active,
 .day-filter.active,
-.time-filter.active {
+.time-filter.active,
+.difficulty-filter.active {
   background-color: var(--primary);
   color: white;
   border-color: var(--primary-dark);
@@ -602,7 +624,8 @@ footer {
 
 .category-filter:hover,
 .day-filter:hover,
-.time-filter:hover {
+.time-filter:hover,
+.difficulty-filter:hover {
   background-color: var(--primary-light);
   color: white;
 }
@@ -794,4 +817,73 @@ body.dark-mode .theme-switch:hover .slider {
     position: static;
     margin-top: 10px;
   }
+/* Social sharing buttons */
+.social-share-container {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border-light);
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.social-share-label {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin-right: 4px;
+}
+
+.social-share-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+  padding: 0;
+}
+
+.social-share-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.social-share-button.twitter {
+  background-color: #1DA1F2;
+  color: white;
+}
+
+.social-share-button.twitter:hover {
+  background-color: #0d8bd9;
+}
+
+.social-share-button.facebook {
+  background-color: #1877F2;
+  color: white;
+}
+
+.social-share-button.facebook:hover {
+  background-color: #0e62c7;
+}
+
+.social-share-button.linkedin {
+  background-color: #0A66C2;
+  color: white;
+}
+
+.social-share-button.linkedin:hover {
+  background-color: #004182;
+}
+
+.social-share-button.email {
+  background-color: #EA4335;
+  color: white;
+}
+
+.social-share-button.email:hover {
+  background-color: #c5362b;
 }
