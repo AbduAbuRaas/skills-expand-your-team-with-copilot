@@ -472,6 +472,45 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Function to create share URL for an activity
+  function getShareText(activityName, details) {
+    const formattedSchedule = formatSchedule(details);
+    return `Check out ${activityName} at Mergington High School! Schedule: ${formattedSchedule}`;
+  }
+
+  // Function to share on Twitter
+  function shareOnTwitter(activityName, details) {
+    const text = getShareText(activityName, details);
+    const url = window.location.href;
+    const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+    window.open(twitterUrl, '_blank', 'width=600,height=400');
+  }
+
+  // Function to share on Facebook
+  function shareOnFacebook(activityName, details) {
+    const url = window.location.href;
+    const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+    window.open(facebookUrl, '_blank', 'width=600,height=400');
+  }
+
+  // Function to share on LinkedIn
+  function shareOnLinkedIn(activityName, details) {
+    const url = window.location.href;
+    const title = `${activityName} - Mergington High School`;
+    const summary = details.description;
+    const linkedInUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
+    window.open(linkedInUrl, '_blank', 'width=600,height=400');
+  }
+
+  // Function to share via Email
+  function shareViaEmail(activityName, details) {
+    const subject = `Join ${activityName} at Mergington High School`;
+    const formattedSchedule = formatSchedule(details);
+    const body = `I thought you might be interested in this activity:\n\n${activityName}\n${details.description}\n\nSchedule: ${formattedSchedule}\n\nLearn more at: ${window.location.href}`;
+    const emailUrl = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = emailUrl;
+  }
+
   // Function to render a single activity card
   function renderActivityCard(name, details) {
     const activityCard = document.createElement("div");
@@ -569,6 +608,13 @@ document.addEventListener("DOMContentLoaded", () => {
         `
         }
       </div>
+      <div class="social-share-container">
+        <span class="social-share-label">Share:</span>
+        <button class="social-share-button twitter" data-activity="${name}" data-share="twitter" title="Share on Twitter">𝕏</button>
+        <button class="social-share-button facebook" data-activity="${name}" data-share="facebook" title="Share on Facebook">f</button>
+        <button class="social-share-button linkedin" data-activity="${name}" data-share="linkedin" title="Share on LinkedIn">in</button>
+        <button class="social-share-button email" data-activity="${name}" data-share="email" title="Share via Email">✉</button>
+      </div>
     `;
 
     // Add click handlers for delete buttons
@@ -586,6 +632,31 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       }
     }
+
+    // Add click handlers for social share buttons
+    const shareButtons = activityCard.querySelectorAll(".social-share-button");
+    shareButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const shareType = button.dataset.share;
+        const activityName = button.dataset.activity;
+        const activityDetails = allActivities[activityName];
+        
+        switch(shareType) {
+          case 'twitter':
+            shareOnTwitter(activityName, activityDetails);
+            break;
+          case 'facebook':
+            shareOnFacebook(activityName, activityDetails);
+            break;
+          case 'linkedin':
+            shareOnLinkedIn(activityName, activityDetails);
+            break;
+          case 'email':
+            shareViaEmail(activityName, activityDetails);
+            break;
+        }
+      });
+    });
 
     activitiesList.appendChild(activityCard);
   }
