@@ -496,8 +496,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // Function to share on LinkedIn
   function shareOnLinkedIn(activityName, details) {
     const url = window.location.href;
-    const title = `${activityName} - Mergington High School`;
-    const summary = details.description;
     const linkedInUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
     window.open(linkedInUrl, '_blank', 'width=600,height=400');
   }
@@ -611,8 +609,8 @@ document.addEventListener("DOMContentLoaded", () => {
       <div class="social-share-container">
         <span class="social-share-label">Share:</span>
         <button class="social-share-button twitter" data-activity="${name}" data-share="twitter" title="Share on Twitter">𝕏</button>
-        <button class="social-share-button facebook" data-activity="${name}" data-share="facebook" title="Share on Facebook">f</button>
-        <button class="social-share-button linkedin" data-activity="${name}" data-share="linkedin" title="Share on LinkedIn">in</button>
+        <button class="social-share-button facebook" data-activity="${name}" data-share="facebook" title="Share on Facebook">📘</button>
+        <button class="social-share-button linkedin" data-activity="${name}" data-share="linkedin" title="Share on LinkedIn">💼</button>
         <button class="social-share-button email" data-activity="${name}" data-share="email" title="Share via Email">✉</button>
       </div>
     `;
