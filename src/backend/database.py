@@ -19,16 +19,24 @@ def hash_password(password):
 
 def init_database():
     """Initialize database if empty"""
+    # Ensure all initial activities exist (upsert individual items).
+    # This allows adding new seed entries (like "Manga Maniacs") without
+    # requiring the whole collection to be empty.
+    for name, details in initial_activities.items():
+        # Use $setOnInsert so existing documents are not overwritten.
+        activities_collection.update_one(
+            {"_id": name},
+            {"$setOnInsert": {**details}},
+            upsert=True,
+        )
 
-    # Initialize activities if empty
-    if activities_collection.count_documents({}) == 0:
-        for name, details in initial_activities.items():
-            activities_collection.insert_one({"_id": name, **details})
-            
-    # Initialize teacher accounts if empty
-    if teachers_collection.count_documents({}) == 0:
-        for teacher in initial_teachers:
-            teachers_collection.insert_one({"_id": teacher["username"], **teacher})
+    # Ensure initial teachers exist (upsert by username)
+    for teacher in initial_teachers:
+        teachers_collection.update_one(
+            {"_id": teacher["username"]},
+            {"$setOnInsert": {**teacher}},
+            upsert=True,
+        )
 
 # Initial database if empty
 initial_activities = {
