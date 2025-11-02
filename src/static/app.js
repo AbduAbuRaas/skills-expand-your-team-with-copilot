@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Theme toggle functionality
   const themeToggle = document.getElementById("theme-toggle");
   const themeIcon = themeToggle.querySelector(".theme-icon");
-  const themeText = themeToggle.querySelector("span:last-child");
+  const themeText = themeToggle.querySelector(".theme-text");
 
   // Check for saved theme preference or default to light mode
   const currentTheme = localStorage.getItem("theme") || "light";
